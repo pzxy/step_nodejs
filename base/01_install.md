@@ -68,4 +68,6 @@ main - main 字段指定了程序的主入口文件，require('moduleName') 就�
 keywords - 关键字
 ```
 
-# 
+# node是RELP(交互式解释器)
+命令行运行node可以直接进行操作。
+
