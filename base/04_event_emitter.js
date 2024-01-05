@@ -12,7 +12,7 @@
 // 注意：一般我们不主动创建EventEmitter，都是在对象中继承它。
 
 // 要点1
-// 相同事件可以设置多个回调，触发以后按照顺序调用。函数可不同，参数按顺传入。
+// 相同事件可以设置多个回调，触发以后按照顺序调用(加入事件队列的顺序)。函数可不同，参数按顺传入。
 console.log(">> 1")
 let eventEmitter = require("events").EventEmitter;
 let event = new eventEmitter();
