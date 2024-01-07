@@ -18,7 +18,7 @@ router.get('/sign', function (req, res) {
 // });
 
 router.post('/do/sign', function (req, res) {
-    var name = req.body.name;
+    var name = req.body.username;
     var email = req.body.email;
     res.send('恭喜' + name + '注册成功，你的邮箱为:' + email);
 });
