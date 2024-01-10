@@ -44,11 +44,11 @@ let sig = web3.eth.abi.encodeFunctionCall(
             },
             {
                 type: "uint256",
-                name: "amountOut",
+                name: "amountIn",
             },
             {
                 type: "uint256",
-                name: "amountInMaximum",
+                name: "amountOutMaximum",
             },
             {
                 type: "uint160",

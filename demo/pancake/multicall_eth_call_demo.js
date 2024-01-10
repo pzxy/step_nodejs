@@ -8,21 +8,9 @@ const BUSDAddr = '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56';
 const CAKEAddr = '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82';
 const account = '0x2156dF574320bc8d30B370892d8E0e30a3c4A869';
 
-// let contract = new web3.eth.Contract(JSON.parse(abi), PSCAdr);
-// console.log(2**24-1);
-// contract.methods.checkOracleSlippage(Buffer.from(BNBAddr+BUSDAddr, 'utf-8'),100000000000000, 100, 60).call().then((res) => {
-//     console.log(res);
-// });
-// contract.methods.stableSwapFactory().call().then((res) => {
-//     console.log(res);
-// });
-// 2. fetch bnb price
-// 3. cacl bnb exchange busd rate
-// 4. wallet
-// 5. call pancake router
-
 // encode data
 let deadline = Math.floor(Date.now() / 1000) + 60 * 20;
+console.log(deadline);
 let sig = web3.eth.abi.encodeFunctionCall(
     {
         name: "exactInputSingle",
@@ -46,11 +34,11 @@ let sig = web3.eth.abi.encodeFunctionCall(
             },
             {
                 type: "uint256",
-                name: "amountOut",
+                name: "amountIn",
             },
             {
                 type: "uint256",
-                name: "amountInMaximum",
+                name: "amountOutMaximum",
             },
             {
                 type: "uint160",
@@ -60,11 +48,11 @@ let sig = web3.eth.abi.encodeFunctionCall(
     },
     [
         BNBAddr,
-        CAKEAddr,
+        BUSDAddr,
         100n,
         account,
-        100000000000000n,
-        10325482300079436n,
+        10000000000000n,
+        2998596936143250n,
         0n]
 );
 const bscFuncHexForExactInputSingle = '0x04e45aaf';
@@ -88,18 +76,19 @@ let txData = web3.eth.abi.encodeFunctionCall(
 );
 console.log(txData);
 let contract = new web3.eth.Contract(JSON.parse(abi), PSCAdr);
+
 const tx = {
     from: account,
-    to: PSCAdr,
     data: txData,
-    nonce: '0x1',
-    type: '0x0'
+    gas: 1000000,
+    gasPrice: 10000000000,
 };
 let privateKey = '';
 web3.eth.accounts.signTransaction(tx, privateKey).then((res) => {
+    console.log("----------------------> sign tx: ", res);
     web3.eth.sendSignedTransaction(res.rawTransaction).then((res) => {
         console.log(res);
     });
 });
-// const transactionHash = web3.eth.sendSignedTransaction(signTx);
-// console.log(transactionHash);
+
+
