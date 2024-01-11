@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.3.1",
     "js-sha3": "^0.9.3",
     "multicall-decode": "^1.0.2",
     "web3": "^4.3.0"
